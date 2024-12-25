@@ -29,7 +29,7 @@ The first thing you should check, if you encounter an error, is that you’re us
 
 ---
 
-## Exercise 1: Superheader
+## Exercise 1: Superheader ✅
 
 Let's build the “Superheader” a thin grey strip that runs along the top of the page:
 
