@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { COLORS, WEIGHTS } from '../../constants';
-import { formatPrice, pluralize, isNewShoe } from '../../utils';
-import Spacer from '../Spacer';
+import { COLORS, WEIGHTS } from "../../constants";
+import { formatPrice, pluralize, isNewShoe } from "../../utils";
+import Spacer from "../Spacer";
 
 const ShoeCard = ({
   slug,
@@ -36,14 +36,19 @@ const ShoeCard = ({
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
+          {variant === "on-sale" ? <SaleFlag>Sale</SaleFlag>: ""}
+          {variant === "new-release" ? <JustReleaseFlag>Just Released!</JustReleaseFlag>: ""}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
-          <Price>{formatPrice(price)}</Price>
+          <Price style={{ "--color": variant === "on-sale" ? COLORS.gray[700] : "", '--text-decoration': variant === "on-sale" ? "line-through" : "none" }}>{formatPrice(price)}</Price>
         </Row>
         <Row>
-          <ColorInfo>{pluralize('Color', numOfColors)}</ColorInfo>
+          <ColorInfo>{pluralize("Color", numOfColors)}</ColorInfo>
+          {variant === "on-sale" && (
+            <SalePrice>{formatPrice(salePrice)}</SalePrice>
+          )}
         </Row>
       </Wrapper>
     </Link>
@@ -59,9 +64,7 @@ const Link = styled.a`
   margin: 16px;
 `;
 
-const Wrapper = styled.article`
-
-`;
+const Wrapper = styled.article``;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -69,10 +72,13 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  border-radius: 16px 16px 4px 4px;
 `;
 
 const Row = styled.div`
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Name = styled.h3`
@@ -80,7 +86,10 @@ const Name = styled.h3`
   color: ${COLORS.gray[900]};
 `;
 
-const Price = styled.span``;
+const Price = styled.span`
+  color: var(--color);
+  text-decoration: var(--text-decoration);
+`;
 
 const ColorInfo = styled.p`
   color: ${COLORS.gray[700]};
@@ -91,4 +100,24 @@ const SalePrice = styled.span`
   color: ${COLORS.primary};
 `;
 
+const Flag = styled.div`
+  padding: 0px 10px;
+  position: absolute;
+  top: 16px;
+  right: -4px;
+  height: 32px;
+  line-height:  32px;
+  font-size: ${14 / 16} rem;
+  font-weight: 700;
+  border-radius: 4px;
+  color:  white;
+`
+
+const SaleFlag = styled(Flag)`
+  background-color: ${COLORS.primary};
+`
+
+const JustReleaseFlag = styled(Flag)`
+  background-color: ${COLORS.secondary};
+`
 export default ShoeCard;
