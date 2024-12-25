@@ -53,8 +53,10 @@ const ShoeCard = ({
 const Link = styled.a`
   text-decoration: none;
   color: inherit;
-  max-width: 370px;
+  min-width: 275px;
+  flex: 1;
   margin-bottom: 62px;
+  margin: 16px;
 `;
 
 const Wrapper = styled.article`
