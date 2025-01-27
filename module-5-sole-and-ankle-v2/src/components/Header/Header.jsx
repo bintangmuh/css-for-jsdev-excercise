@@ -29,6 +29,7 @@ const Header = () => {
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
+          <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
         </DesktopNav>
@@ -40,7 +41,7 @@ const Header = () => {
           <UnstyledButton>
             <Icon id="search" strokeWidth={1} />
           </UnstyledButton>
-          <UnstyledButton>
+          <UnstyledButton onClick={() => setShowMobileMenu(true)}>
             <Icon id="menu" strokeWidth={1} />
           </UnstyledButton>
         </MobileNav>
@@ -62,7 +63,7 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
-
+  overflow: auto;
   @media ${QUERIES.tabletAndSmaller} {
     justify-content: space-between;
     align-items: center;
@@ -71,7 +72,7 @@ const MainHeader = styled.div`
 
 const DesktopNav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1rem, 9.2vw - 4.5rem, 3.5rem);
   margin: 0px 48px;
 
   @media ${QUERIES.tabletAndSmaller} {
